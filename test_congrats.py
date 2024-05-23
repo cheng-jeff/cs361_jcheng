@@ -1,7 +1,7 @@
 # Name: Jeffrey Cheng
 # OSU Email: chengjef@oregonstate.edu
 # Course: CS361 - Software Engineering 1
-# Due Date: 06MAY2024 @ 11:59 PM PST. Using grace days, new due date is 08MAY2024 @ 11:59 PM PST.
+# Due Date: 20MAY2024 @ 11:59 PM PST. Using grace days, new due date is 08MAY2024 @ 11:59 PM PST.
 # Description: Congratulations message microservice testing program.
 
 # Sources:

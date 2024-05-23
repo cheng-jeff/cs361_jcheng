@@ -1,7 +1,7 @@
 # Name: Jeffrey Cheng
 # OSU Email: chengjef@oregonstate.edu
 # Course: CS361 - Software Engineering 1
-# Due Date: 06MAY2024 @ 11:59 PM PST. Using grace days, new due date is 08MAY2024 @ 11:59 PM PST.
+# Due Date: 20MAY2024 @ 11:59 PM PST. Using grace days, new due date is 22MAY2024 @ 11:59 PM PST.
 # Description: Congratulations message microservice program.
 
 # Sources:
@@ -62,6 +62,21 @@ def check_trivia_correct(client_json: object) -> bool:
     else:
         return False
 
+def print_command_complete() -> None:
+    """
+    Print message for when a command is finished processing. Leveraged from Professor Letaw's
+    example video https://canvas.oregonstate.edu/courses/1958534/assignments/9583963?module_item_id=24164834
+    """
+    print(f"\nPlease wait about one (1) second for the communication to complete.")
+    waiting = ""
+
+    for i in range(3):
+        time.sleep(0.33)
+        waiting += "."
+        print(f"{waiting}")
+
+    print(f"\n")
+
 def congrats_main():
     """
     Main function
@@ -104,6 +119,8 @@ def congrats_main():
         }
             print(f"Server sending to client: {server_json}")
             socket.send_json(server_json)
+
+            print_command_complete()
 
 if __name__ == "__main__":
     congrats_main()
