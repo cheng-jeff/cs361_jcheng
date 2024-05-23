@@ -37,6 +37,7 @@ def test_main():
     print(f"Establishing connection...")
     socket = context.socket(zmq.REQ)
 
+    # Waiting code...
     waiting = ""
 
     for i in range(3):
