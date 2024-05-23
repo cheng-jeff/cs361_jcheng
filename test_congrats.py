@@ -15,13 +15,22 @@ def test_main():
 
     # Create a socket on the client side and connect to "tcp://*:5555"
     context = zmq.Context()
-    print(f"Connecting to CS361 Server...")
+    print(f"Establishing connection...")
     socket = context.socket(zmq.REQ)
     socket.connect("tcp://localhost:5555")
+    print(f"Connection established.")
 
-    client_pack = {
-        ""
+    client_json = {
+        "client_type" : "trivia",
+        "correct" : False
     }
+
+    socket.send_json(client_json)
+
+    print(f"Sending: {client_json}")
+
+    server_json = socket.recv_json()
+    print(f"Receiving: {server_json}")
 
 if __name__ == "__main__":
     test_main()
