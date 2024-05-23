@@ -36,8 +36,19 @@ def test_main():
     context = zmq.Context()
     print(f"Establishing connection...")
     socket = context.socket(zmq.REQ)
+
+    waiting = ""
+
+    for i in range(3):
+        time.sleep(0.33)
+        waiting += "."
+        print(f"{waiting}")
+
     socket.connect("tcp://localhost:5555")
     print(f"Connection established.")
+
+    # Initialize trivia correct
+    trivia_correct = False
 
     # Get user input to which client they will be running.
     user_inp = input("What client type will you be using: ")
@@ -45,6 +56,7 @@ def test_main():
         valid = True
     elif user_inp.lower() == "workout" or user_inp.lower() == "expense":
         valid = True
+        trivia_correct = True
     else:
         valid = False
 
@@ -53,15 +65,34 @@ def test_main():
         user_inp = input("What client type will you be using: ")
         if user_inp.lower() == "trivia":
             valid = True
-        elif user_inp.lower() == "workout" or user_inp.lower() == "expense":
+        elif user_inp.lower() == "workout" or user_inp.lower() == "expenses":
             valid = True
+            trivia_correct = True
         else:
             valid = False
+
+    if user_inp.lower() == "trivia":
+        user_correct = input("Did the user get the question correct? (Y/N) ")
+        if user_correct.lower() == "y":
+            trivia_correct = True
+        elif user_correct.lower() == "n":
+            trivia_correct = False
+        else:
+            user_correct = None
+            while user_correct is None:
+                user_correct = input("Did the user get the question correct? (Y/N) ")
+                if user_correct.lower() == "y":
+                    trivia_correct = True
+                elif user_correct.lower() == "n":
+                    trivia_correct = False
+                else:
+                    user_correct = None
+
 
     # Create JSON Object to send to Server/Microservice
     client_json = {
         "client_type" : user_inp,
-        "correct" : False
+        "correct" : trivia_correct
     }
 
     # Send JSON object from client to microservice.
