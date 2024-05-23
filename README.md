@@ -23,5 +23,40 @@ test_client_json = {
 The following example code, which can be seen in _test_congrats.py_, can be leveraged for new users to request and receive data from the **Congratulatory Messenger** microservice:
 
 ```
+import time
+import zmq
+import json
 
+def test_main():
+    """
+    Client main function
+    """
+
+    # Create a socket on the client side and connect to "tcp://*:5555"
+    context = zmq.Context()
+    print(f"Establishing connection...")
+    socket = context.socket(zmq.REQ)
+    socket.connect("tcp://localhost:5555")
+    print(f"Connection established.")
+
+    # Creating JSOB Object with proper JSON object attributes to send to microservice.
+    client_json = {
+        "client_type" : "trivia",
+        "correct" : False
+    }
+
+    # Send JSON object to microservice.
+    socket.send_json(client_json)
+
+    print(f"Sending: {client_json}")
+
+    # Receive JSON object back from microservice.
+    server_json = socket.recv_json()
+    print(f"Receiving: {server_json}")
+
+if __name__ == "__main__":
+    test_main()
 ```
+
+## UML Sequence Diagram
+![image](https://github.com/cheng-jeff/cs361_jcheng/assets/59590715/998125f4-ee3b-428f-b6fd-f3965b4fb333)
