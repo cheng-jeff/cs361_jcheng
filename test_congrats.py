@@ -4,6 +4,11 @@
 # Due Date: 06MAY2024 @ 11:59 PM PST. Using grace days, new due date is 08MAY2024 @ 11:59 PM PST.
 # Description: Congratulations message microservice testing program.
 
+# Sources:
+# 1. https://zeromq.org/get-started/
+# 2. https://pyzmq.readthedocs.io/en/latest/api/zmq.html
+# 3. https://canvas.oregonstate.edu/courses/1806257/pages/exploration-file-handling-pickling-json?module_item_id=19702215
+
 import time
 import zmq
 import json
