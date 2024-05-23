@@ -87,7 +87,7 @@ def test_main():
 
     # Receive a JSON object back from the microservice.
     server_json = socket.recv_json()
-    print(f"Receiving: {server_json}")
+    print(f"Client receiving from server: {server_json}")
 
 if __name__ == "__main__":
     test_main()
