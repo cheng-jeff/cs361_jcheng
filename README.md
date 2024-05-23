@@ -29,7 +29,7 @@ import json
 
 def test_main():
     """
-    Client main function
+    Client main function for testing program.
     """
 
     # Create a socket on the client side and connect to "tcp://*:5555"
@@ -39,18 +39,36 @@ def test_main():
     socket.connect("tcp://localhost:5555")
     print(f"Connection established.")
 
-    # Creating JSOB Object with proper JSON object attributes to send to microservice.
+    # Get user input to which client they will be running.
+    user_inp = input("What client type will you be using: ")
+    if user_inp.lower() == "trivia":
+        valid = True
+    elif user_inp.lower() == "workout" or user_inp.lower() == "expense":
+        valid = True
+    else:
+        valid = False
+
+    # Loop until a valid client type is input.
+    while valid is False:
+        user_inp = input("What client type will you be using: ")
+        if user_inp.lower() == "trivia":
+            valid = True
+        elif user_inp.lower() == "workout" or user_inp.lower() == "expense":
+            valid = True
+        else:
+            valid = False
+
+    # Create JSON Object to send to Server/Microservice
     client_json = {
-        "client_type" : "trivia",
+        "client_type" : user_inp,
         "correct" : False
     }
 
-    # Send JSON object to microservice.
+    # Send JSON object from client to microservice.
     socket.send_json(client_json)
+    print(f"Client sending to server: {client_json}")
 
-    print(f"Sending: {client_json}")
-
-    # Receive JSON object back from microservice.
+    # Receive a JSON object back from the microservice.
     server_json = socket.recv_json()
     print(f"Receiving: {server_json}")
 
